@@ -1,11 +1,11 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS Service Catalog sample template. Creates an Amazon EC2 instance running the Amazon Linux AMI. The AMI is chosen based on the region in which the stack is run. This example creates an EC2 security group for the instance to give you SSH access. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
+  "Description" : "AWS Service Catalog sample template. Creates an Amazon EC2 instance running the Amazon Linux AMI. The AMI is chosen based on the region in which the stack is run. This example creates an EC2 security group for the instance to give you RDP access. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
 
   "Parameters" : {
     "KeyName": {
-      "Description" : "Name of an existing EC2 key pair for SSH access to the EC2 instance.",
+      "Description" : "Name of an existing EC2 key pair for RDP access to the EC2 instance.",
       "Type": "AWS::EC2::KeyPair::KeyName"
     },
 
@@ -22,8 +22,8 @@
       "AllowedValues" : [ "vpc-abcdefghi1234567", "vpc-abcdefghi123456711111", "vpc-abcdefghi123456722222" ]
     }
     ,
-    "SSHLocation" : {
-      "Description" : "The IP address range that can SSH to the EC2 instance.",
+    "RDPLocation" : {
+      "Description" : "The IP address range that can RDP to the EC2 instance.",
       "Type": "String",
       "MinLength": "9",
       "MaxLength": "18",
@@ -40,12 +40,12 @@
         "Parameters" : ["InstanceType"]
       },{
         "Label" : {"default": "Security configuration"},
-        "Parameters" : ["KeyName", "SSHLocation"]
+        "Parameters" : ["KeyName", "RDPLocation"]
       }],
       "ParameterLabels" : {
         "InstanceType": {"default": "Server size:"},
         "KeyName": {"default": "Key pair:"},
-        "SSHLocation": {"default": "CIDR range:"}
+        "RDPLocation": {"default": "CIDR range:"}
       }
     }
   },
@@ -81,13 +81,13 @@
     "InstanceSecurityGroup" : {
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
-        "GroupDescription" : "Enable SSH access via port 22",
+        "GroupDescription" : "Enable RDP access via port 22",
         "VpcId": {"Ref": "VpcId"},
         "SecurityGroupIngress" : [ {
           "IpProtocol" : "tcp",
-          "FromPort" : "22",
-          "ToPort" : "22",
-          "CidrIp" : { "Ref" : "SSHLocation"}
+          "FromPort" : "3389",
+          "ToPort" : "3389",
+          "CidrIp" : { "Ref" : "RDPLocation"}
         } ]
       }
     }
