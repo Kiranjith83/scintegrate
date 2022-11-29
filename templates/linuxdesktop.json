@@ -85,8 +85,8 @@
         "VpcId": {"Ref": "VpcId"},
         "SecurityGroupIngress" : [ {
           "IpProtocol" : "tcp",
-          "FromPort" : "21",
-          "ToPort" : "23",
+          "FromPort" : "22",
+          "ToPort" : "22",
           "CidrIp" : { "Ref" : "SSHLocation"}
         } ]
       }
