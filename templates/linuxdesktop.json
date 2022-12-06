@@ -18,8 +18,7 @@
     "VpcId":{
       "Description" : "Enter the VPC ID.",
       "Type" : "String",
-      "Default" : "vpc-abcdefghi1234567",
-      "AllowedValues" : [ "vpc-abcdefghi1234567", "vpc-abcdefghi123456711111", "vpc-abcdefghi123456722222" ]
+      "Default": "vpc-0e2ad4a9a384c3ef4"
     }
     ,
     "SSHLocation" : {
@@ -74,7 +73,7 @@
         "SecurityGroupIds" : [ { "Ref" : "InstanceSecurityGroup" } ],
         "KeyName" : { "Ref" : "KeyName" },
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" }, "HVM64" ] },
-        "SubnetId": "subnet-abcdefghi1234567"
+        "SubnetId": "subnet-01957ebcc76c09f2f"
       }
     },
 
